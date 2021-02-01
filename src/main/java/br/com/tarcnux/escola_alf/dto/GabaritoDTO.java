@@ -93,12 +93,12 @@ public class GabaritoDTO
 
 	
 
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

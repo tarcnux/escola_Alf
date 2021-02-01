@@ -53,7 +53,7 @@ public class AlunoResource {
 		dto = alunoService.insert(dto);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(dto.getid()).toUri();
+				.buildAndExpand(dto.getId()).toUri();
 		
 		return ResponseEntity.created(uri).body(dto);
 	}
