@@ -2,6 +2,8 @@ package br.com.tarcnux.escola_alf.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -56,4 +58,29 @@ public class ProvaService {
 		
 		return new ProvaDTO(entity);
 	}
+
+	@Transactional
+	public ProvaDTO update(Long id, ProvaDTO dto) {
+		try {
+			Prova entity = provaRepository.getOne(id);
+		
+			entity.setResposta01(dto.getResposta01());
+			entity.setResposta02(dto.getResposta02());
+			entity.setResposta03(dto.getResposta03());
+			entity.setResposta04(dto.getResposta04());
+			entity.setResposta05(dto.getResposta05());
+			entity.setResposta06(dto.getResposta06());
+			entity.setResposta07(dto.getResposta07());
+			entity.setResposta08(dto.getResposta08());
+			entity.setResposta09(dto.getResposta09());
+			entity.setResposta10(dto.getResposta10());
+			
+			entity = provaRepository.save(entity);
+			return new ProvaDTO(entity);
+			
+			} catch(EntityNotFoundException e) {
+				throw new ResourceNotFoundException(String.format("Id %d não encontrado", id));
+			}
+	}
+	
 }
