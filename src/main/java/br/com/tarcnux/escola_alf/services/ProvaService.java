@@ -34,4 +34,26 @@ public class ProvaService {
 		
 		return new ProvaDTO(entity);
 	}
+
+	@Transactional
+	public ProvaDTO insert(ProvaDTO dto) {
+		Prova entity = new Prova();
+		
+		entity.setIdAluno(dto.getIdAluno());
+		entity.setIdGabarito(dto.getIdGabarito());
+		entity.setResposta01(dto.getResposta01());
+		entity.setResposta02(dto.getResposta02());
+		entity.setResposta03(dto.getResposta03());
+		entity.setResposta04(dto.getResposta04());
+		entity.setResposta05(dto.getResposta05());
+		entity.setResposta06(dto.getResposta06());
+		entity.setResposta07(dto.getResposta07());
+		entity.setResposta08(dto.getResposta08());
+		entity.setResposta09(dto.getResposta09());
+		entity.setResposta10(dto.getResposta10());
+		
+		entity = provaRepository.save(entity);
+		
+		return new ProvaDTO(entity);
+	}
 }
