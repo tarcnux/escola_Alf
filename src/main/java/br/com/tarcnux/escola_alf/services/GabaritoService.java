@@ -1,9 +1,8 @@
 package br.com.tarcnux.escola_alf.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +17,10 @@ public class GabaritoService {
 	private GabaritoRepository gabaritoRepository;
 	
 	@Transactional(readOnly = true)
-	public List<GabaritoDTO> findAll() {
+	public Page<GabaritoDTO> findAllPaged(PageRequest pageRequest) {
 		
-		List<Gabarito> listGabarito = gabaritoRepository.findAll();
+		Page<Gabarito> pageGabarito = gabaritoRepository.findAll(pageRequest);
 		
-		return listGabarito.stream().map(gabarito -> new GabaritoDTO(gabarito)).collect(Collectors.toList());
+		return pageGabarito.map(Gabarito -> new GabaritoDTO(Gabarito));
 	}
-
 }

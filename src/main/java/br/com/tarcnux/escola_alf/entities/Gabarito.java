@@ -16,7 +16,7 @@ public class Gabarito
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_gabarito;
+	private Long id;
 	private String nome;
 	private Character resposta01;
 	private Character resposta02;
@@ -45,11 +45,11 @@ public class Gabarito
 	}
 
 
-	public Gabarito(Long id_gabarito, String nome, Character resposta01, Character resposta02, Character resposta03, Character resposta04,
+	public Gabarito(Long id, String nome, Character resposta01, Character resposta02, Character resposta03, Character resposta04,
 			Character resposta05, Character resposta06, Character resposta07, Character resposta08, Character resposta09, Character resposta10,
 			Integer peso01, Integer peso02, Integer peso03, Integer peso04, Integer peso05, Integer peso06, Integer peso07, Integer peso08,
 			Integer peso09, Integer peso10) {
-		this.id_gabarito = id_gabarito;
+		this.id = id;
 		this.nome = nome;
 		this.resposta01 = resposta01;
 		this.resposta02 = resposta02;
@@ -74,13 +74,13 @@ public class Gabarito
 	}
 
 
-	public Long getId_gabarito() {
-		return id_gabarito;
+	public Long getid() {
+		return id;
 	}
 
 
-	public void setId_gabarito(Long id_gabarito) {
-		this.id_gabarito = id_gabarito;
+	public void setid(Long id) {
+		this.id = id;
 	}
 
 
@@ -298,7 +298,7 @@ public class Gabarito
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id_gabarito == null) ? 0 : id_gabarito.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -312,10 +312,10 @@ public class Gabarito
 		if (getClass() != obj.getClass())
 			return false;
 		Gabarito other = (Gabarito) obj;
-		if (id_gabarito == null) {
-			if (other.id_gabarito != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!id_gabarito.equals(other.id_gabarito))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

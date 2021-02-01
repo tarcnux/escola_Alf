@@ -8,29 +8,29 @@ public class AlunoDTO
 	implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Long id_aluno;
+	private Long id;
 	private String nome;
 	
 	public AlunoDTO() {
 		
 	}
 
-	public AlunoDTO(Long id_aluno, String nome) {
-		this.id_aluno = id_aluno;
+	public AlunoDTO(Long id, String nome) {
+		this.id = id;
 		this.nome = nome;
 	}
 	
 	public AlunoDTO(Aluno entity) {
-		this.id_aluno = entity.getId_aluno();
+		this.id = entity.getid();
 		this.nome = entity.getNome();
 	}
 
-	public Long getId_aluno() {
-		return id_aluno;
+	public Long getid() {
+		return id;
 	}
 
-	public void setId_aluno(Long id_aluno) {
-		this.id_aluno = id_aluno;
+	public void setid(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -45,7 +45,7 @@ public class AlunoDTO
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id_aluno == null) ? 0 : id_aluno.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -58,10 +58,10 @@ public class AlunoDTO
 		if (getClass() != obj.getClass())
 			return false;
 		AlunoDTO other = (AlunoDTO) obj;
-		if (id_aluno == null) {
-			if (other.id_aluno != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!id_aluno.equals(other.id_aluno))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

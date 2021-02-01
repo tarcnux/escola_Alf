@@ -1,11 +1,13 @@
 package br.com.tarcnux.escola_alf.resources;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tarcnux.escola_alf.dto.AlunoDTO;
@@ -19,10 +21,18 @@ public class AlunoResource {
 	private AlunoService alunoService;
 	
 	@GetMapping
-	public ResponseEntity<List<AlunoDTO>> findAll() {
+	public ResponseEntity<Page<AlunoDTO>> findAll(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "3") Integer linesPerPage,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy	
+			) {
 		
-		List<AlunoDTO> listAlunos = alunoService.findAll();
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, 
+				Direction.valueOf(direction), orderBy);
 		
-		return ResponseEntity.ok().body(listAlunos);
+		Page<AlunoDTO> PageDTO = alunoService.findAllPaged(pageRequest);
+		
+		return ResponseEntity.ok().body(PageDTO);
 	}
 }
