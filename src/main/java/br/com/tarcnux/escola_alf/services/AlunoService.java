@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.tarcnux.escola_alf.dto.AlunoDTO;
 import br.com.tarcnux.escola_alf.entities.Aluno;
 import br.com.tarcnux.escola_alf.repositories.AlunoRepository;
+import br.com.tarcnux.escola_alf.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AlunoService {
@@ -29,7 +30,7 @@ public class AlunoService {
 	@Transactional(readOnly = true)
 	public AlunoDTO findById(Long id) {
 		Optional<Aluno> objOptional = alunoRepository.findById(id);
-		Aluno entity = objOptional.get();
+		Aluno entity = objOptional.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 		
 		return new AlunoDTO(entity);
 	}

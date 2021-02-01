@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.tarcnux.escola_alf.dto.GabaritoDTO;
 import br.com.tarcnux.escola_alf.entities.Gabarito;
 import br.com.tarcnux.escola_alf.repositories.GabaritoRepository;
+import br.com.tarcnux.escola_alf.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class GabaritoService {
@@ -29,7 +30,7 @@ public class GabaritoService {
 	@Transactional(readOnly = true)
 	public GabaritoDTO findById(Long id) {
 		Optional<Gabarito> objOptional = gabaritoRepository.findById(id);
-		Gabarito entity = objOptional.get();
+		Gabarito entity = objOptional.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 		
 		return new GabaritoDTO(entity);
 	}

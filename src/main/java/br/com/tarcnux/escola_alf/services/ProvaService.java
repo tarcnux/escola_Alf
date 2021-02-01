@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.tarcnux.escola_alf.dto.ProvaDTO;
 import br.com.tarcnux.escola_alf.entities.Prova;
 import br.com.tarcnux.escola_alf.repositories.ProvaRepository;
+import br.com.tarcnux.escola_alf.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProvaService {
@@ -29,7 +30,7 @@ public class ProvaService {
 	@Transactional(readOnly = true)
 	public ProvaDTO findById(Long id) {
 		Optional<Prova> objOptional = provaRepository.findById(id);
-		Prova entity = objOptional.get();
+		Prova entity = objOptional.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 		
 		return new ProvaDTO(entity);
 	}
