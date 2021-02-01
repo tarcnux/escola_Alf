@@ -35,4 +35,15 @@ public class AlunoService {
 		return new AlunoDTO(entity);
 	}
 
+	@Transactional
+	public AlunoDTO insert(AlunoDTO dto) {
+		Aluno entity = new Aluno();
+		
+		entity.setNome(dto.getNome());
+		
+		entity = alunoRepository.save(entity);
+		
+		return new AlunoDTO(entity);
+	}
+
 }
