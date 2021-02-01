@@ -2,6 +2,8 @@ package br.com.tarcnux.escola_alf.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +46,18 @@ public class AlunoService {
 		entity = alunoRepository.save(entity);
 		
 		return new AlunoDTO(entity);
+	}
+
+	@Transactional
+	public AlunoDTO update(Long id, AlunoDTO dto) {
+		try {
+		Aluno entity = alunoRepository.getOne(id);
+		entity.setNome(dto.getNome());
+		entity = alunoRepository.save(entity);
+		return new AlunoDTO(entity);
+		} catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(String.format("Id %d não encontrado", id));
+		}
 	}
 
 }
