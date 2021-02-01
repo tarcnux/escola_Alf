@@ -1,5 +1,7 @@
 package br.com.tarcnux.escola_alf.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,14 @@ public class AlunoService {
 		Page<Aluno> pageAluno = alunoRepository.findAll(pageRequest);
 		
 		return pageAluno.map(aluno -> new AlunoDTO(aluno));
+	}
+
+	@Transactional(readOnly = true)
+	public AlunoDTO findById(Long id) {
+		Optional<Aluno> objOptional = alunoRepository.findById(id);
+		Aluno entity = objOptional.get();
+		
+		return new AlunoDTO(entity);
 	}
 
 }

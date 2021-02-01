@@ -1,5 +1,7 @@
 package br.com.tarcnux.escola_alf.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,5 +24,13 @@ public class GabaritoService {
 		Page<Gabarito> pageGabarito = gabaritoRepository.findAll(pageRequest);
 		
 		return pageGabarito.map(Gabarito -> new GabaritoDTO(Gabarito));
+	}
+
+	@Transactional(readOnly = true)
+	public GabaritoDTO findById(Long id) {
+		Optional<Gabarito> objOptional = gabaritoRepository.findById(id);
+		Gabarito entity = objOptional.get();
+		
+		return new GabaritoDTO(entity);
 	}
 }
